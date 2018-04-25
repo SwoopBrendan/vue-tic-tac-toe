@@ -24,7 +24,11 @@
 </template>
 
 <script>
+    import Cell from './Cell.vue'
+
     export default {
+        components: { Cell },
+
         data () {
             return {
                 activePlayer: 'O',
@@ -130,6 +134,7 @@
         },
 
         created () {
+
             Event.$on('strike', (cellNumber) => {
                     this.cells[cellNumber] = this.activePlayer;
                     this.moves++;
@@ -140,6 +145,7 @@
             Event.$on('gridReset', () => {
                 Object.assign(this.$data, this.$options.data())
             })
+
         }
     }
 </script>

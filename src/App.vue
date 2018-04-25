@@ -1,25 +1,56 @@
 <template>
-  <div id="app">
-    <div id="details">
-      <h1>Tic Tac Toe</h1>
+    <div>
+        <div class="scoreBoard">
+            <span>O has {{ wins.O }} wins</span>
+            <h2>Score Board</h2>
+            <span>X has {{ wins.X }} wins</span>
+        </div>
+        <div id="app">
+            <div id="details">
+                <h1>Tic Tac Toe</h1>
+                <h2>Match #{{ matches + 1 }}</h2>
+            </div>
+            <grid></grid>
+            <button class="restart" @click="restart">Restart</button>
+        </div>
     </div>
-
-    <grid></grid>
-  </div>
 </template>
 
 <script>
+import Grid from './components/Grid.vue'
+
 export default {
-  name: 'app',
-  data () {
-    return {
-      matches: 0,
-      wins: {
-        O: 0,
-        X: 0
-      }
+
+    components: {Grid},
+
+    name: 'app',
+
+    data () {
+
+        return {
+
+            matches: 0,
+
+            wins: {
+              O: 0,
+              X: 0
+            }
+
+        }
+
+    },
+
+    methods: {
+
+        restart() {
+
+            Event.$emit('clearCell');
+            Event.$emit('gridReset');
+            this.match++;
+
+        }
+
     }
-}
 }
 </script>
 
@@ -73,9 +104,7 @@ h1 {
   width: 100%;
   height: 15px;
   background-color: #16a085;
-  box-shadow: 10px solid #fff;
   padding: 20px;
-  overflow-x: none;
 }
 
 .scoreBoard h2 {

@@ -1,5 +1,5 @@
 <template>
-  <td class="cell" @click="select">{{ mark }}</td>
+  <td class="cell" @click="strike">{{ mark }}</td>
 </template>
 
 <script>
@@ -8,14 +8,10 @@
         props: ['name'],
 
         data () {
-
             return {
-
                 frozen: false,
                 mark: ''
-
             }
-
         },
 
         methods: {
@@ -32,9 +28,14 @@
         },
 
         created() {
+            Event.$on('clearCell', () => {
+                this.mark = '';
+                this.frozen = false;
+
+            });
+
             Event.$on('freeze', () => this.frozen = true);
         }
-
     }
 </script>
 
