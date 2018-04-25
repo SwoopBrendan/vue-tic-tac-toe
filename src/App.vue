@@ -1,14 +1,8 @@
 <template>
     <div>
-        <div class="scoreBoard">
-            <span>O has {{ wins.O }} wins</span>
-            <h2>Score Board</h2>
-            <span>X has {{ wins.X }} wins</span>
-        </div>
         <div id="app">
             <div id="details">
-                <h1>Tic Tac Toe</h1>
-                <h2>Match #{{ matches + 1 }}</h2>
+                <h2 >Tic Tac Toe</h2>
             </div>
             <grid></grid>
             <button class="restart" @click="restart">Restart</button>
@@ -78,21 +72,14 @@ h1 {
 }
 
 .restart {
-  background-color: #e74c3c;
-  color: #fff;
-  border: 0px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  font-family: 'Dosis', Helvetica, sans-serif;
   font-size: 1.4em;
   font-weight: bold;
-  margin: 0px;
+  margin-top: 30px;
   padding: 15px;
   width: 100%;
 }
 
 .restart:hover {
-  background-color: #c0392b;
   cursor: pointer;
 }
 
