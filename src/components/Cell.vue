@@ -1,5 +1,5 @@
 <template>
-  <td class="cell">{{ mark }}</td>
+  <td class="cell" @click="select">{{ mark }}</td>
 </template>
 
 <script>

@@ -20,7 +20,7 @@
 
 <script>
     export default {
-    data () {
+      data () {
         return {
           // can be O or X
           activePlayer: 'O',
@@ -49,6 +49,58 @@
                 [1, 5, 9], [3, 5, 7]             // diagonals
             ],
         }
+      },
+
+      computed: {
+
+          nonActivePlayer () {
+
+              if (this.activePlayer === 'O') {
+
+                  return 'X'
+                  
+              }
+
+              return 'O'
+
+          }
+
+      },
+
+      methods: {
+        select () {
+            if (! this.frozen) {
+                // gets either X or O from the Grid component
+                this.mark = this.$parent.activePlayer
+
+                this.frozen = true
+
+                // fires an event to notify the Grid component that a mark is placed
+                Event.$emit('strike', this.name)
+            }
+        }
+      },
+
+      created () {
+
+      	Event.$on('strike', (cellNumber) => {
+
+    			this.cells[cellNumber] = this.activePlayer
+
+    			this.moves++
+
+    			this.gameStatus = this.changeGameStatus()
+
+    			this.changePlayer()
+
+      	})
+
+      	Event.$on('gridReset', () => {
+
+      		Object.assign(this.$data, this.$options.data())
+
+      	})
+
       }
     }
 </script>
