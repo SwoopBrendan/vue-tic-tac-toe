@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="gameStatus" :class="gameStatusColor">
+        <div class="gameStatus">
           {{ gameStatusMessage }}
         </div>
         <table class="grid">
@@ -34,7 +34,6 @@
                 activePlayer: 'O',
                 gameStatus: 'turn',
                 gameStatusMessage: `O's turn`,
-                gameStatusColor: 'statusTurn',
                 moves: 0,
                 cells: {
                     1: '', 2: '', 3: '',
@@ -60,15 +59,11 @@
         },
 
         watch: {
-            // watches for change in the value of gameStatus and changes the status
-            // message and color accordingly
             gameStatus () {
                 if (this.gameStatus === 'win') {
-                    this.gameStatusColor = 'statusWin';
                     this.gameStatusMessage = `${this.activePlayer} Wins !`;
                     return
                 } else if (this.gameStatus === 'draw') {
-                    this.gameStatusColor = 'statusDraw';
                     this.gameStatusMessage = 'Draw !';
                     return
                 }
@@ -86,7 +81,7 @@
             // returns the game status to the gameStatus property
             changeGameStatus () {
                 if (this.checkForWin()) {
-                     return this.gameIsWon()
+                    return this.gameIsWon()
                 } else if (this.moves === 9) {
                     return 'draw'
                 }
@@ -122,13 +117,9 @@
             },
 
             gameIsWon () {
-
                 Event.$emit('win', this.activePlayer);
-
                 this.gameStatusMessage = `${this.activePlayer} Wins !`;
-
                 Event.$emit('freeze');
-
                 return 'win'
             }
         },
@@ -136,10 +127,10 @@
         created () {
 
             Event.$on('strike', (cellNumber) => {
-                    this.cells[cellNumber] = this.activePlayer;
-                    this.moves++;
-                    this.gameStatus = this.changeGameStatus();
-                    this.changePlayer()
+                this.cells[cellNumber] = this.activePlayer;
+                this.changePlayer();
+                this.moves++;
+                this.gameStatus = this.changeGameStatus();
             });
 
             Event.$on('gridReset', () => {
@@ -154,11 +145,12 @@
 .grid {
   width: 100%;
   border-collapse: collapse;
+    text-align: center;
 }
 
 .gameStatus {
     color: black;
-    margin-bottom: 30px;
+    margin: auto;
     padding: 15px;
     font-size: 1.4em;
     font-weight: bold;

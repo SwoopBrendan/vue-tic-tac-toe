@@ -1,11 +1,27 @@
 <template>
-    <div>
-        <div id="app">
-            <div id="details">
-                <h2 >Tic Tac Toe</h2>
+    <div class="container">
+        <section class="hero is-primary">
+            <div class="hero-body typewriter">
+                <h1 class="title">
+                    tic tac toe, bro?
+                </h1>
             </div>
-            <grid></grid>
-            <button class="restart" @click="restart">Restart</button>
+        </section>
+        <div id="app" class="bg-lb">
+            <div class="card">
+                <div class="card-content">
+                    <grid></grid>
+                    <button class="button is-warning restart" @click="restart">Restart</button>
+                </div>
+                <footer class="card-footer scoreBoard">
+                    <div class="card-footer-item">
+                        O - {{ wins.O }}
+                    </div>
+                    <div class="card-footer-item">
+                        X - {{ wins.X }}
+                    </div>
+                </footer>
+            </div>
         </div>
     </div>
 </template>
@@ -49,8 +65,23 @@ export default {
 </script>
 
 <style>
+.typewriter h1 {
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation:
+        typing 5s steps(50, end),
+        blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
 body {
-  background-color: #fff;
   color: #fff;
   font-family: 'Dosis', Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -60,9 +91,13 @@ body {
 }
 
 #app {
-  margin: 0 auto;
-  max-width: 270px;
-  color: #34495e;
+    margin: 0 auto;
+    max-width: 350px;
+    color: #34495e;
+}
+
+.card {
+    box-shadow: none;
 }
 
 h1 {
@@ -72,36 +107,26 @@ h1 {
 }
 
 .restart {
-  font-size: 1.4em;
-  font-weight: bold;
-  margin-top: 30px;
-  padding: 15px;
-  width: 100%;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 30px;
+    width: 100%;
 }
 
 .restart:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .scoreBoard {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 15px;
-  background-color: #16a085;
-  padding: 20px;
-}
-
-.scoreBoard h2 {
-  margin: 0px;
-}
-
-.scoreBoard span {
-  float: right;
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-left: 20px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 15px;
+    background-color: #16a085;
+    padding: 20px;
+    font-weight: bolder;
 }
 </style>

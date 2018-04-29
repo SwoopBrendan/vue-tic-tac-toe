@@ -16,10 +16,10 @@
 
         methods: {
             strike () {
-                if (! this.frozen) {
+                if (!this.frozen) {
                     this.mark = this.$parent.activePlayer;
                     this.frozen = true;
-                    Event.$emit('strike', this.name)
+                    Event.$emit('strike', this.name);
                 }
             }
         },
@@ -38,10 +38,13 @@
 
 <style>
 .cell {
+  font-family: 'Gochi Hand', sans-serif;
   width: 33.333%;
   height: 90px;
   border: 6px solid #2c3e50;
   font-size: 3.5em;
+  text-align: center;
+  transition: 0.5s;
 }
 
 .cell:hover {
