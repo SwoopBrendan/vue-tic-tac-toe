@@ -7,7 +7,7 @@
                 </h1>
             </div>
         </section>
-        <div id="app" class="bg-lb">
+        <div id="app">
             <div class="card">
                 <div class="card-content">
                     <grid></grid>
